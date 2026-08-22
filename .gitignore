@@ -1,0 +1,7 @@
+mlruns/
+models/*.pkl
+venv/
+.env
+.pytest_cache/
+__pycache__/
+*.pyc
