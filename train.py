@@ -43,3 +43,5 @@ def train() -> float:
 
 if __name__ == "__main__":
     train()
+
+print('All done')
