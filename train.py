@@ -31,7 +31,11 @@ def train() -> float:
         mlflow.log_param("n_estimators", N_ESTIMATORS)
         mlflow.log_param("random_state", RANDOM_STATE)
         mlflow.log_metric("accuracy", accuracy)
-        mlflow.sklearn.log_model(model, "model")
+        mlflow.sklearn.log_model(
+            sk_model=model,
+            name="model",
+            skops_trusted_types=["sklearn.tree._tree.Tree"],
+        )
 
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, MODEL_PATH)
