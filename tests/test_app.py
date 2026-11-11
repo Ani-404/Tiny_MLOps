@@ -18,6 +18,13 @@ def client():
         yield test_client
 
 
+def test_index_page(client):
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "RepoPulse" in response.text
+
+
 def test_health(client):
     response = client.get("/health")
     assert response.status_code == 200

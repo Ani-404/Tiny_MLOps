@@ -15,9 +15,12 @@ from typing import Any
 import httpx
 import joblib
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from train import FEATURE_NAMES, MODEL_PATH
+
+STATIC_INDEX = Path(__file__).parent / "static" / "index.html"
 
 model = None
 
@@ -235,6 +238,13 @@ def generate_actionable_insights(metrics: dict[str, Any]) -> list[str]:
         )
 
     return insights
+
+
+@app.get("/", response_class=HTMLResponse)
+def index():
+    if STATIC_INDEX.exists():
+        return STATIC_INDEX.read_text(encoding="utf-8")
+    return "<h1>RepoPulse API is running</h1>"
 
 
 @app.get("/health")

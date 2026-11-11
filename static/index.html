@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RepoPulse | GitHub Open-Source Health & Welcomeness Scorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #090d16;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .mesh-gradient {
+      background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.08) 35%, transparent 70%);
+    }
+    .score-circle {
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 mesh-gradient selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- Navbar -->
+  <header class="border-b border-slate-800/80 bg-slate-950/40 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-sky-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">RepoPulse</span>
+        <span class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">MLOps 2.0</span>
+      </div>
+      <div class="flex items-center space-x-4 text-sm text-slate-400">
+        <a href="/docs" target="_blank" class="hover:text-slate-200 transition-colors flex items-center space-x-1.5">
+          <span>API Docs</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <!-- Hero Section -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white leading-tight">
+        Score Any GitHub Repo with <span class="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">Production ML</span>
+      </h1>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Extracts 11 real-world signals across commit velocity, maintainer triage, and community documentation to evaluate open-source health.
+      </p>
+    </div>
+
+    <!-- Input Card -->
+    <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl mb-8">
+      <form id="analyze-form" class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </div>
+          <input
+            id="repo-input"
+            type="text"
+            required
+            placeholder="e.g. pallets/flask or https://github.com/tiangolo/fastapi"
+            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all text-sm sm:text-base mono"
+          />
+        </div>
+        <button
+          type="submit"
+          id="submit-btn"
+          class="px-6 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white shadow-lg shadow-sky-500/25 flex items-center justify-center space-x-2 transition-all active:scale-[0.98] disabled:opacity-50"
+        >
+          <span id="btn-text">Audit Repo</span>
+          <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+          <svg id="btn-spinner" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white hidden" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Quick Links -->
+      <div class="mt-4 pt-4 border-t border-slate-800/60 flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-slate-500">Try popular repos:</span>
+        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">pallets/flask</button>
+        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">tiangolo/fastapi</button>
+        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">psf/requests</button>
+        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">kennethreitz/autoenv</button>
+      </div>
+    </div>
+
+    <!-- Error Banner -->
+    <div id="error-card" class="hidden mb-8 p-4 rounded-xl bg-red-950/40 border border-red-500/30 text-red-300 text-sm flex items-start space-x-3">
+      <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div id="error-message"></div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-container" class="hidden space-y-6">
+
+      <!-- Top Summary Card -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-3 text-center md:text-left">
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+              <span id="res-repo-name" class="text-2xl font-bold mono text-white">owner/repo</span>
+              <span id="res-tier-badge" class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Thriving & Welcoming
+              </span>
+            </div>
+            <p class="text-slate-400 text-sm max-w-xl">
+              Model Confidence: <span id="res-confidence" class="font-semibold text-slate-200">92%</span> • Machine Learning decision evaluated by calibrated RandomForest pipeline.
+            </p>
+            <!-- Probability Bar -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex justify-between text-xs text-slate-400">
+                <span>Tier Probability Distribution</span>
+              </div>
+              <div id="prob-bars" class="h-2 w-full rounded-full bg-slate-800 flex overflow-hidden">
+                <!-- populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Circular Score Dial -->
+          <div class="flex flex-col items-center">
+            <div class="relative w-32 h-32 flex items-center justify-center">
+              <svg class="w-32 h-32 score-circle" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="10" class="text-slate-800" fill="transparent" />
+                <circle id="score-ring" cx="60" cy="60" r="50" stroke="currentColor" stroke-width="10" stroke-dasharray="314.159" stroke-dashoffset="314.159" stroke-linecap="round" class="text-sky-500 transition-all duration-1000 ease-out" fill="transparent" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="res-score-num" class="text-3xl font-extrabold text-white">0</span>
+                <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Health</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Weekly Commits</span>
+          <span id="metric-commits" class="text-lg font-bold mono text-white">0</span>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Issue Close Rate</span>
+          <span id="metric-close-rate" class="text-lg font-bold mono text-emerald-400">0%</span>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Days Since Push</span>
+          <span id="metric-days-push" class="text-lg font-bold mono text-white">0d</span>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Stars</span>
+          <span id="metric-stars" class="text-lg font-bold mono text-yellow-400">0</span>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Contributing Doc</span>
+          <span id="metric-contrib" class="text-sm font-semibold">Yes</span>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
+          <span class="text-xs text-slate-400 block mb-1">Good First Issues</span>
+          <span id="metric-gfi" class="text-sm font-semibold">Active</span>
+        </div>
+      </div>
+
+      <!-- Actionable Insights List -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-xl">
+        <h3 class="text-base font-semibold text-white mb-3 flex items-center space-x-2">
+          <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+          <span>Actionable AI Insights & Feedback</span>
+        </h3>
+        <ul id="insights-list" class="space-y-2 text-sm text-slate-300">
+          <!-- populated by JS -->
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('analyze-form');
+    const input = document.getElementById('repo-input');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const errorCard = document.getElementById('error-card');
+    const errorMessage = document.getElementById('error-message');
+    const resultsContainer = document.getElementById('results-container');
+
+    // Quick sample repo button handlers
+    document.querySelectorAll('.sample-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        input.value = btn.textContent;
+        form.requestSubmit();
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const repo = input.value.trim();
+      if (!repo) return;
+
+      // Reset states
+      errorCard.classList.add('hidden');
+      resultsContainer.classList.add('hidden');
+      submitBtn.disabled = true;
+      btnText.textContent = 'Analyzing...';
+      btnIcon.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ repo_url: repo })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.detail || 'Failed to inspect repository.');
+        }
+
+        renderResults(data);
+      } catch (err) {
+        errorMessage.textContent = err.message;
+        errorCard.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Audit Repo';
+        btnIcon.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
+      }
+    });
+
+    function renderResults(data) {
+      document.getElementById('res-repo-name').textContent = data.repo;
+      document.getElementById('res-confidence').textContent = `${(data.confidence * 100).toFixed(0)}%`;
+
+      // Tier badge color
+      const tierBadge = document.getElementById('res-tier-badge');
+      tierBadge.textContent = data.health_tier;
+      tierBadge.className = 'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ';
+      
+      const scoreRing = document.getElementById('score-ring');
+      const scoreNum = document.getElementById('res-score-num');
+      scoreNum.textContent = data.health_score;
+
+      if (data.health_score >= 85) {
+        tierBadge.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
+        scoreRing.classList.add('text-emerald-400');
+        scoreRing.classList.remove('text-sky-400', 'text-amber-400', 'text-rose-400');
+      } else if (data.health_score >= 70) {
+        tierBadge.classList.add('bg-sky-500/10', 'text-sky-400', 'border-sky-500/20');
+        scoreRing.classList.add('text-sky-400');
+        scoreRing.classList.remove('text-emerald-400', 'text-amber-400', 'text-rose-400');
+      } else if (data.health_score >= 50) {
+        tierBadge.classList.add('bg-amber-500/10', 'text-amber-400', 'border-amber-500/20');
+        scoreRing.classList.add('text-amber-400');
+        scoreRing.classList.remove('text-emerald-400', 'text-sky-400', 'text-rose-400');
+      } else {
+        tierBadge.classList.add('bg-rose-500/10', 'text-rose-400', 'border-rose-500/20');
+        scoreRing.classList.add('text-rose-400');
+        scoreRing.classList.remove('text-emerald-400', 'text-sky-400', 'text-amber-400');
+      }
+
+      // Animate score ring: perimeter = 2 * PI * 50 = ~314.159
+      const maxOffset = 314.159;
+      const offset = maxOffset - (data.health_score / 100) * maxOffset;
+      setTimeout(() => {
+        scoreRing.style.strokeDashoffset = offset;
+      }, 50);
+
+      // Metrics grid
+      const m = data.metrics;
+      document.getElementById('metric-commits').textContent = m.avg_weekly_commits.toFixed(1);
+      document.getElementById('metric-close-rate').textContent = `${(m.issue_close_rate * 100).toFixed(0)}%`;
+      document.getElementById('metric-days-push').textContent = `${Math.round(m.days_since_last_push)}d`;
+      document.getElementById('metric-stars').textContent = m.stars_count.toLocaleString();
+
+      const contribEl = document.getElementById('metric-contrib');
+      contribEl.textContent = m.has_contributing ? 'Present' : 'Missing';
+      contribEl.className = `text-sm font-semibold ${m.has_contributing ? 'text-emerald-400' : 'text-slate-500'}`;
+
+      const gfiEl = document.getElementById('metric-gfi');
+      gfiEl.textContent = m.has_good_first_issues ? 'Active' : 'None';
+      gfiEl.className = `text-sm font-semibold ${m.has_good_first_issues ? 'text-emerald-400' : 'text-slate-500'}`;
+
+      // Insights
+      const insightsList = document.getElementById('insights-list');
+      insightsList.innerHTML = '';
+      (data.insights || []).forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start space-x-2.5 py-1';
+        li.innerHTML = `
+          <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>${item}</span>
+        `;
+        insightsList.appendChild(li);
+      });
+
+      // Probability bars
+      const probContainer = document.getElementById('prob-bars');
+      probContainer.innerHTML = '';
+      const colors = {
+        'Thriving & Welcoming': 'bg-emerald-500',
+        'Healthy & Maintained': 'bg-sky-500',
+        'Developing / Small Community': 'bg-amber-500',
+        'Stale / High Risk': 'bg-rose-500',
+      };
+      for (const [tier, prob] of Object.entries(data.tier_probabilities || {})) {
+        if (prob > 0.01) {
+          const bar = document.createElement('div');
+          bar.className = `${colors[tier] || 'bg-slate-500'} h-full transition-all duration-500`;
+          bar.style.width = `${(prob * 100).toFixed(1)}%`;
+          bar.title = `${tier}: ${(prob * 100).toFixed(1)}%`;
+          probContainer.appendChild(bar);
+        }
+      }
+
+      resultsContainer.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
+
