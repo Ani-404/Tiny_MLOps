@@ -1,0 +1,271 @@
+repo_name,days_since_last_push,avg_weekly_commits,issue_close_rate,open_issues_count,stars_count,forks_count,has_readme,has_contributing,has_license,has_code_of_conduct,has_good_first_issues,health_tier
+tiangolo/fastapi,1.41,7.33,0.582,193,6653,848,1,1,1,1,1,Thriving & Welcoming
+pallets/flask,2.84,10.85,0.8006,47,27371,4848,1,1,1,1,1,Thriving & Welcoming
+psf/requests,0.2,10.4,0.8549,573,7041,1664,1,1,1,1,1,Thriving & Welcoming
+django/django,2.37,13.97,0.6542,32,3000,422,1,1,1,1,1,Thriving & Welcoming
+scikit-learn/scikit-learn,0.46,17.49,0.8726,66,3000,328,1,1,1,1,1,Thriving & Welcoming
+pytorch/pytorch,6.55,20.6,0.6687,401,20046,3489,1,1,1,0,0,Thriving & Welcoming
+pandas-dev/pandas,0.1,5.49,0.8247,128,5181,577,1,1,1,1,1,Thriving & Welcoming
+numpy/numpy,3.01,18.46,0.7233,354,16492,3865,1,1,1,1,1,Thriving & Welcoming
+encode/httpx,5.11,3.0,0.8015,40,17290,3552,1,1,1,1,1,Thriving & Welcoming
+pydantic/pydantic,2.06,3.0,0.7893,46,13422,1903,1,1,1,0,1,Thriving & Welcoming
+astral-sh/uv,12.73,18.6,0.55,36,72131,13009,1,1,1,1,1,Thriving & Welcoming
+astral-sh/ruff,0.12,22.35,0.7548,172,3079,388,1,1,1,1,1,Thriving & Welcoming
+Textualize/rich,1.25,11.86,0.7529,332,9050,2122,1,1,1,1,1,Thriving & Welcoming
+pytest-dev/pytest,3.88,12.76,0.6469,112,36933,3744,1,1,1,0,1,Thriving & Welcoming
+encode/starlette,2.39,20.3,0.8971,197,33656,7652,1,1,1,0,1,Thriving & Welcoming
+tiangolo/fastapi-replica-15,0.92,21.61,0.8188,1386,14950,2599,1,1,1,1,0,Thriving & Welcoming
+pallets/flask-replica-16,3.11,13.26,0.8678,19,4397,806,1,1,1,1,0,Thriving & Welcoming
+psf/requests-replica-17,2.86,10.92,0.7997,34,70151,10104,1,1,1,1,1,Thriving & Welcoming
+django/django-replica-18,2.15,22.62,0.6283,172,3350,382,1,1,1,1,1,Thriving & Welcoming
+scikit-learn/scikit-learn-replica-19,1.01,5.0,0.7014,36,8939,1594,1,1,1,1,0,Thriving & Welcoming
+pytorch/pytorch-replica-20,0.16,28.33,0.9629,108,7836,875,1,0,1,1,1,Thriving & Welcoming
+pandas-dev/pandas-replica-21,1.58,3.99,0.7566,231,61064,8670,1,1,1,1,1,Thriving & Welcoming
+numpy/numpy-replica-22,1.63,9.62,0.5729,195,13051,2231,1,1,1,1,1,Thriving & Welcoming
+encode/httpx-replica-23,3.02,8.4,0.7873,134,39802,4952,1,0,1,0,1,Thriving & Welcoming
+pydantic/pydantic-replica-24,8.45,3.0,0.5991,15,22633,5336,1,1,1,0,0,Thriving & Welcoming
+astral-sh/uv-replica-25,0.3,13.35,0.6793,48,8720,1783,1,1,1,1,1,Thriving & Welcoming
+astral-sh/ruff-replica-26,0.99,17.31,0.6901,101,5984,1433,1,1,1,1,1,Thriving & Welcoming
+Textualize/rich-replica-27,0.33,20.97,0.6315,70,37226,3783,1,1,1,1,1,Thriving & Welcoming
+pytest-dev/pytest-replica-28,9.02,25.47,0.8916,26,33685,7358,1,1,1,0,1,Thriving & Welcoming
+encode/starlette-replica-29,1.75,18.0,0.6193,166,68149,7848,1,1,1,0,1,Thriving & Welcoming
+tiangolo/fastapi-replica-30,3.67,20.93,0.7948,72,3000,707,1,1,1,0,1,Thriving & Welcoming
+pallets/flask-replica-31,0.17,23.42,0.7398,21,4851,1117,1,1,1,0,1,Thriving & Welcoming
+psf/requests-replica-32,0.13,14.42,0.7913,41,150000,30654,1,1,1,1,1,Thriving & Welcoming
+django/django-replica-33,0.14,16.44,0.6155,76,3000,459,1,1,1,1,1,Thriving & Welcoming
+scikit-learn/scikit-learn-replica-34,3.59,3.0,0.8572,147,32544,5296,1,1,1,0,0,Thriving & Welcoming
+pytorch/pytorch-replica-35,1.42,22.86,0.8723,118,18666,3178,1,1,1,0,1,Thriving & Welcoming
+pandas-dev/pandas-replica-36,5.03,23.1,0.8109,167,3000,602,1,1,1,0,1,Thriving & Welcoming
+numpy/numpy-replica-37,2.2,17.21,0.5676,251,16306,2617,1,1,1,1,1,Thriving & Welcoming
+encode/httpx-replica-38,3.65,11.4,0.5849,15,38687,5889,1,1,1,1,1,Thriving & Welcoming
+pydantic/pydantic-replica-39,5.95,13.18,0.6454,89,21671,3235,1,1,1,0,1,Thriving & Welcoming
+astral-sh/uv-replica-40,0.41,7.39,0.78,233,7816,829,1,1,1,1,0,Thriving & Welcoming
+astral-sh/ruff-replica-41,0.39,11.15,0.6473,81,14052,3090,1,1,1,1,1,Thriving & Welcoming
+Textualize/rich-replica-42,0.19,19.11,0.7626,50,150000,23300,1,1,1,0,1,Thriving & Welcoming
+pytest-dev/pytest-replica-43,3.75,12.14,0.6283,413,3000,409,1,1,1,0,1,Thriving & Welcoming
+encode/starlette-replica-44,0.71,9.36,0.55,217,4680,845,1,1,1,1,1,Thriving & Welcoming
+tiangolo/fastapi-replica-45,1.0,13.98,0.9209,92,15565,2110,1,1,1,1,1,Thriving & Welcoming
+pallets/flask-replica-46,0.62,9.03,0.6948,39,21339,4904,1,1,1,1,1,Thriving & Welcoming
+psf/requests-replica-47,7.95,13.49,0.7024,51,4014,657,1,1,1,0,1,Thriving & Welcoming
+django/django-replica-48,1.02,7.17,0.8291,94,6487,1311,1,1,1,1,1,Thriving & Welcoming
+scikit-learn/scikit-learn-replica-49,1.29,18.56,0.7432,146,88979,20133,1,1,1,1,1,Thriving & Welcoming
+pytorch/pytorch-replica-50,0.54,17.26,0.7145,64,9895,1548,1,1,1,1,1,Thriving & Welcoming
+pandas-dev/pandas-replica-51,0.79,21.81,0.623,37,18851,4542,1,1,1,0,1,Thriving & Welcoming
+numpy/numpy-replica-52,2.9,19.8,0.7991,38,81774,18931,1,1,1,0,1,Thriving & Welcoming
+encode/httpx-replica-53,0.41,16.41,0.8549,236,42970,8429,1,1,1,1,1,Thriving & Welcoming
+pydantic/pydantic-replica-54,0.6,15.02,0.7246,85,16591,3180,1,0,1,1,1,Thriving & Welcoming
+astral-sh/uv-replica-55,3.58,29.86,0.7056,23,128565,27058,1,1,1,1,0,Thriving & Welcoming
+astral-sh/ruff-replica-56,12.57,29.23,0.7921,58,37149,8840,1,1,1,1,1,Thriving & Welcoming
+Textualize/rich-replica-57,0.76,3.0,0.6708,201,11062,1707,1,1,1,0,1,Thriving & Welcoming
+pytest-dev/pytest-replica-58,0.59,9.21,0.55,95,5223,1225,1,1,1,0,1,Thriving & Welcoming
+encode/starlette-replica-59,2.5,18.05,0.9795,27,17059,2171,1,1,1,1,1,Thriving & Welcoming
+tiangolo/fastapi-replica-60,3.1,11.83,0.624,321,5736,1151,1,0,1,1,1,Thriving & Welcoming
+pallets/flask-replica-61,3.17,9.63,0.7447,113,18093,2887,1,1,1,1,1,Thriving & Welcoming
+psf/requests-replica-62,0.1,3.98,0.8779,256,64790,9084,1,1,1,1,1,Thriving & Welcoming
+django/django-replica-63,1.05,3.48,0.8033,776,29932,4151,1,1,1,1,1,Thriving & Welcoming
+scikit-learn/scikit-learn-replica-64,0.57,4.22,0.6631,144,93399,18656,1,1,1,1,1,Thriving & Welcoming
+pytorch/pytorch-replica-65,2.2,23.42,0.6918,19,5124,785,1,1,1,1,1,Thriving & Welcoming
+pandas-dev/pandas-replica-66,3.27,14.57,0.8168,101,3000,646,1,1,1,1,1,Thriving & Welcoming
+numpy/numpy-replica-67,3.5,19.92,0.6657,30,40756,7683,1,1,1,1,1,Thriving & Welcoming
+encode/httpx-replica-68,9.0,6.08,0.679,165,62537,14219,1,1,1,1,1,Thriving & Welcoming
+pydantic/pydantic-replica-69,8.65,20.37,0.7785,140,10343,2540,1,1,1,1,1,Thriving & Welcoming
+astral-sh/uv-replica-70,1.15,5.57,0.75,55,9767,1438,1,1,1,1,1,Thriving & Welcoming
+astral-sh/ruff-replica-71,6.51,14.81,0.55,183,14135,3107,1,1,1,1,1,Thriving & Welcoming
+Textualize/rich-replica-72,1.96,19.52,0.8105,385,4688,546,1,1,1,1,1,Thriving & Welcoming
+pytest-dev/pytest-replica-73,0.13,18.76,0.7521,76,4960,1150,1,1,1,1,1,Thriving & Welcoming
+encode/starlette-replica-74,14.0,21.0,0.8818,52,26015,3967,1,0,1,1,1,Thriving & Welcoming
+marshmallow-code/marshmallow,45.0,2.94,0.8044,43,1240,132,1,0,1,1,1,Healthy & Maintained
+tqdm/tqdm,1.15,3.59,0.6941,43,772,99,1,1,1,1,0,Healthy & Maintained
+pypa/flit,1.01,4.76,0.8538,5,757,114,1,1,1,1,1,Healthy & Maintained
+tornadoweb/tornado,3.73,5.1,0.6023,49,4956,844,1,0,1,1,0,Healthy & Maintained
+cherrypy/cherrypy,20.97,8.33,0.7602,46,2698,380,1,0,1,1,1,Healthy & Maintained
+gevent/gevent,11.99,6.38,0.5793,39,3096,374,1,1,1,0,1,Healthy & Maintained
+paramiko/paramiko,13.97,4.62,0.7177,7,4745,733,1,0,1,1,1,Healthy & Maintained
+urllib3/urllib3,16.62,5.42,0.45,31,500,99,1,1,1,0,1,Healthy & Maintained
+certifi/python-certifi,14.2,3.48,0.6178,27,574,110,1,1,1,0,0,Healthy & Maintained
+chardet/chardet,45.0,6.74,0.825,105,2997,306,1,1,1,1,1,Healthy & Maintained
+dateutil/dateutil,17.18,4.43,0.5341,89,2955,407,1,0,1,1,0,Healthy & Maintained
+pyca/cryptography,2.69,2.65,0.5677,19,1370,121,1,1,1,1,0,Healthy & Maintained
+marshmallow-code/marshmallow-replica-12,14.25,4.44,0.6517,26,1207,239,1,0,1,1,1,Healthy & Maintained
+tqdm/tqdm-replica-13,9.84,2.31,0.8109,26,4860,505,1,0,1,1,1,Healthy & Maintained
+pypa/flit-replica-14,1.0,6.06,0.7722,20,5372,955,1,0,1,1,1,Healthy & Maintained
+tornadoweb/tornado-replica-15,7.22,5.5,0.8789,22,644,112,1,1,1,1,1,Healthy & Maintained
+cherrypy/cherrypy-replica-16,3.11,3.18,0.4778,79,1618,270,1,1,1,0,0,Healthy & Maintained
+gevent/gevent-replica-17,45.0,0.8,0.7105,32,500,75,1,1,1,1,1,Healthy & Maintained
+paramiko/paramiko-replica-18,15.85,3.07,0.7974,42,1350,187,1,0,1,0,0,Healthy & Maintained
+urllib3/urllib3-replica-19,5.34,1.61,0.8588,83,500,44,1,0,1,0,1,Healthy & Maintained
+certifi/python-certifi-replica-20,6.76,3.82,0.8826,65,6139,840,1,1,1,1,1,Healthy & Maintained
+chardet/chardet-replica-21,2.77,3.68,0.5243,34,1586,304,1,0,1,0,0,Healthy & Maintained
+dateutil/dateutil-replica-22,45.0,1.91,0.6334,6,25000,4000,1,0,0,0,1,Healthy & Maintained
+pyca/cryptography-replica-23,2.71,5.19,0.6425,39,1753,270,1,1,1,0,1,Healthy & Maintained
+marshmallow-code/marshmallow-replica-24,14.04,9.51,0.47,17,2432,386,1,1,0,1,0,Healthy & Maintained
+tqdm/tqdm-replica-25,24.55,5.35,0.811,71,5150,883,1,1,1,1,0,Healthy & Maintained
+pypa/flit-replica-26,9.44,5.92,0.8004,9,1334,166,1,0,1,1,1,Healthy & Maintained
+tornadoweb/tornado-replica-27,11.59,0.8,0.9,207,568,72,1,1,1,1,1,Healthy & Maintained
+cherrypy/cherrypy-replica-28,20.12,0.8,0.6022,28,3143,289,1,1,1,0,0,Healthy & Maintained
+gevent/gevent-replica-29,19.5,0.8,0.831,70,1580,255,1,0,1,1,0,Healthy & Maintained
+paramiko/paramiko-replica-30,10.05,4.1,0.7919,48,2078,316,1,1,1,0,0,Healthy & Maintained
+urllib3/urllib3-replica-31,11.33,7.37,0.8181,19,4035,527,1,1,1,1,0,Healthy & Maintained
+certifi/python-certifi-replica-32,10.6,3.1,0.8106,88,9167,1334,1,0,1,1,0,Healthy & Maintained
+chardet/chardet-replica-33,45.0,5.54,0.45,21,2447,365,1,0,1,0,1,Healthy & Maintained
+dateutil/dateutil-replica-34,2.56,3.16,0.6731,18,1869,329,1,0,1,1,1,Healthy & Maintained
+pyca/cryptography-replica-35,9.14,1.57,0.45,46,1991,388,1,0,1,0,0,Healthy & Maintained
+marshmallow-code/marshmallow-replica-36,1.22,2.8,0.8247,21,500,49,1,1,1,1,1,Healthy & Maintained
+tqdm/tqdm-replica-37,8.83,2.63,0.6827,29,619,76,1,0,1,1,0,Healthy & Maintained
+pypa/flit-replica-38,6.07,2.28,0.9,40,1805,328,1,0,1,0,1,Healthy & Maintained
+tornadoweb/tornado-replica-39,5.75,5.92,0.7511,18,641,126,1,1,1,0,1,Healthy & Maintained
+cherrypy/cherrypy-replica-40,30.73,7.78,0.8621,5,1927,188,1,1,1,0,0,Healthy & Maintained
+gevent/gevent-replica-41,39.6,5.77,0.6764,6,2400,254,1,1,1,0,0,Healthy & Maintained
+paramiko/paramiko-replica-42,18.21,2.52,0.6197,21,1198,113,1,0,1,1,0,Healthy & Maintained
+urllib3/urllib3-replica-43,8.55,0.8,0.9,69,1590,164,1,1,1,1,1,Healthy & Maintained
+certifi/python-certifi-replica-44,17.6,6.97,0.7005,66,815,78,1,1,1,0,0,Healthy & Maintained
+chardet/chardet-replica-45,44.69,2.01,0.5213,29,548,65,1,1,1,0,0,Healthy & Maintained
+dateutil/dateutil-replica-46,7.38,4.4,0.6785,82,589,78,1,0,1,0,1,Healthy & Maintained
+pyca/cryptography-replica-47,7.43,8.03,0.6267,115,549,92,1,1,1,0,0,Healthy & Maintained
+marshmallow-code/marshmallow-replica-48,15.12,4.66,0.45,57,5754,588,1,0,1,1,1,Healthy & Maintained
+tqdm/tqdm-replica-49,3.7,6.02,0.8121,27,3434,493,1,0,1,1,0,Healthy & Maintained
+pypa/flit-replica-50,45.0,7.56,0.5919,16,2589,312,1,1,1,0,0,Healthy & Maintained
+tornadoweb/tornado-replica-51,6.95,5.95,0.7219,26,500,88,1,1,1,1,0,Healthy & Maintained
+cherrypy/cherrypy-replica-52,16.88,6.78,0.7878,14,2989,434,1,1,1,0,0,Healthy & Maintained
+gevent/gevent-replica-53,1.7,6.53,0.5772,33,18041,2543,1,0,1,1,1,Healthy & Maintained
+paramiko/paramiko-replica-54,12.14,7.19,0.55,64,715,142,1,0,1,1,0,Healthy & Maintained
+urllib3/urllib3-replica-55,9.72,6.3,0.6573,20,500,48,1,0,1,1,0,Healthy & Maintained
+certifi/python-certifi-replica-56,7.14,1.73,0.688,127,853,68,1,1,1,1,0,Healthy & Maintained
+chardet/chardet-replica-57,10.65,10.04,0.4516,164,9236,1631,1,0,1,0,0,Healthy & Maintained
+dateutil/dateutil-replica-58,1.0,6.89,0.8342,5,4027,393,1,0,1,0,0,Healthy & Maintained
+pyca/cryptography-replica-59,10.94,4.97,0.5791,52,5695,717,1,1,1,0,0,Healthy & Maintained
+marshmallow-code/marshmallow-replica-60,4.89,3.74,0.5212,75,1487,269,1,0,1,0,0,Healthy & Maintained
+tqdm/tqdm-replica-61,1.72,5.01,0.45,22,2578,248,1,1,1,1,0,Healthy & Maintained
+pypa/flit-replica-62,1.0,1.76,0.7142,16,718,122,1,1,1,0,0,Healthy & Maintained
+tornadoweb/tornado-replica-63,1.0,4.75,0.4542,26,2314,340,1,1,1,0,0,Healthy & Maintained
+cherrypy/cherrypy-replica-64,15.75,4.72,0.4796,35,2560,312,1,0,1,0,0,Healthy & Maintained
+gevent/gevent-replica-65,22.81,7.04,0.8104,57,2642,237,1,1,1,0,1,Healthy & Maintained
+paramiko/paramiko-replica-66,22.76,9.03,0.45,18,1946,275,1,1,1,0,1,Healthy & Maintained
+urllib3/urllib3-replica-67,2.7,2.73,0.6123,121,1260,169,1,1,1,0,0,Healthy & Maintained
+certifi/python-certifi-replica-68,7.48,5.78,0.5726,75,2997,376,1,1,1,0,0,Healthy & Maintained
+chardet/chardet-replica-69,4.06,5.41,0.8273,92,534,87,1,1,1,1,1,Healthy & Maintained
+dateutil/dateutil-replica-70,3.89,4.79,0.7003,28,564,86,1,0,1,1,0,Healthy & Maintained
+pyca/cryptography-replica-71,40.98,5.16,0.8128,46,550,44,1,1,1,1,1,Healthy & Maintained
+marshmallow-code/marshmallow-replica-72,1.0,3.86,0.5125,140,2567,302,1,1,1,0,0,Healthy & Maintained
+tqdm/tqdm-replica-73,8.18,3.25,0.6613,51,1027,125,1,1,1,1,1,Healthy & Maintained
+pypa/flit-replica-74,5.21,3.47,0.5101,44,820,97,1,1,1,0,1,Healthy & Maintained
+kylebeadle/Python-Audio-Player,4.64,1.58,0.6262,25,102,14,1,1,1,0,0,Developing / Small Community
+m-col/pydantic-xml,42.79,0.2,0.4207,12,29,2,1,1,0,0,0,Developing / Small Community
+s-m-e-e/minimal-mlops,24.24,2.1,0.5433,3,88,4,1,0,1,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer,4.98,1.55,0.5974,1,10,1,0,1,1,0,0,Developing / Small Community
+alex-k/weather-notifier-cli,40.11,3.82,0.472,12,48,1,1,1,1,1,1,Developing / Small Community
+open-micro/fastapi-crud-demo,15.27,4.59,0.3,7,150,20,1,0,1,0,0,Developing / Small Community
+py-student/algo-visualizer,4.88,0.76,0.3303,3,168,14,1,0,1,0,0,Developing / Small Community
+cli-crafter/git-easy-sync,0.84,3.6,0.6037,1,30,2,1,0,1,0,0,Developing / Small Community
+indie-maker/saas-landing-py,4.45,4.45,0.7589,4,14,1,1,0,1,1,0,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-9,21.81,2.15,0.6924,5,57,5,1,1,1,1,0,Developing / Small Community
+m-col/pydantic-xml-replica-10,18.21,2.76,0.5214,2,12,0,1,0,0,0,1,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-11,19.88,1.95,0.3,8,42,4,1,1,0,1,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-12,13.74,0.2,0.5566,4,5,0,1,1,1,0,0,Developing / Small Community
+alex-k/weather-notifier-cli-replica-13,5.8,3.82,0.7397,5,44,6,1,0,1,0,0,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-14,22.01,0.72,0.8176,3,11,0,1,0,1,0,0,Developing / Small Community
+py-student/algo-visualizer-replica-15,6.71,1.73,0.4785,4,45,4,1,0,0,0,1,Developing / Small Community
+cli-crafter/git-easy-sync-replica-16,8.73,0.52,0.5516,18,29,3,1,1,1,0,1,Developing / Small Community
+indie-maker/saas-landing-py-replica-17,8.88,2.91,0.5158,21,385,45,1,0,1,0,0,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-18,1.07,0.23,0.7462,8,27,2,1,0,1,1,0,Developing / Small Community
+m-col/pydantic-xml-replica-19,15.17,0.51,0.3455,40,6,0,1,1,1,0,1,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-20,2.52,1.85,0.515,3,28,4,1,1,1,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-21,4.09,0.39,0.3337,11,42,6,1,1,1,0,1,Developing / Small Community
+alex-k/weather-notifier-cli-replica-22,4.03,4.6,0.4626,0,285,32,1,0,1,0,1,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-23,5.88,2.07,0.5978,8,58,6,1,1,1,0,1,Developing / Small Community
+py-student/algo-visualizer-replica-24,33.67,1.12,0.6044,2,26,0,1,1,0,1,0,Developing / Small Community
+cli-crafter/git-easy-sync-replica-25,6.41,1.51,0.6686,1,14,0,1,1,1,0,1,Developing / Small Community
+indie-maker/saas-landing-py-replica-26,6.98,0.2,0.5369,5,12,1,1,0,1,0,0,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-27,20.66,3.1,0.7596,11,450,17,1,0,1,0,0,Developing / Small Community
+m-col/pydantic-xml-replica-28,17.88,1.37,0.6046,5,12,0,1,0,1,0,1,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-29,40.04,4.53,0.6646,5,17,1,1,0,1,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-30,22.47,2.84,0.5564,5,41,4,0,0,1,0,0,Developing / Small Community
+alex-k/weather-notifier-cli-replica-31,11.01,1.99,0.6663,2,163,20,1,0,1,0,1,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-32,4.37,4.25,0.6712,1,108,7,1,0,1,0,0,Developing / Small Community
+py-student/algo-visualizer-replica-33,1.08,0.2,0.6975,3,11,0,1,0,1,0,0,Developing / Small Community
+cli-crafter/git-easy-sync-replica-34,59.59,6.13,0.4969,8,25,1,0,0,1,0,0,Developing / Small Community
+indie-maker/saas-landing-py-replica-35,8.37,2.85,0.572,5,43,5,1,0,1,0,0,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-36,5.1,5.51,0.5449,5,26,1,1,0,1,0,0,Developing / Small Community
+m-col/pydantic-xml-replica-37,2.86,1.33,0.4801,2,8,1,1,0,1,0,0,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-38,2.87,0.54,0.7601,5,18,1,1,0,1,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-39,3.26,2.9,0.4108,3,63,9,1,1,1,0,1,Developing / Small Community
+alex-k/weather-notifier-cli-replica-40,15.17,1.74,0.3279,2,60,8,1,1,1,1,1,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-41,3.17,1.45,0.7464,1,55,5,1,0,0,0,0,Developing / Small Community
+py-student/algo-visualizer-replica-42,46.91,3.63,0.3012,2,27,0,1,0,0,0,0,Developing / Small Community
+cli-crafter/git-easy-sync-replica-43,45.36,0.93,0.3326,0,100,12,1,0,1,0,0,Developing / Small Community
+indie-maker/saas-landing-py-replica-44,3.83,0.2,0.617,8,6,0,1,1,1,0,1,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-45,52.69,6.07,0.427,1,32,3,1,0,1,0,0,Developing / Small Community
+m-col/pydantic-xml-replica-46,1.29,2.52,0.5825,6,103,10,1,1,1,0,0,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-47,0.69,3.83,0.6601,2,34,4,1,0,1,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-48,23.52,4.69,0.8417,2,85,3,1,1,1,1,1,Developing / Small Community
+alex-k/weather-notifier-cli-replica-49,8.99,3.54,0.6183,2,58,7,1,1,0,0,0,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-50,6.33,4.25,0.4249,40,108,8,1,0,1,1,0,Developing / Small Community
+py-student/algo-visualizer-replica-51,29.62,4.29,0.6476,6,78,8,1,1,1,0,0,Developing / Small Community
+cli-crafter/git-easy-sync-replica-52,27.77,1.22,0.85,3,40,5,1,0,1,1,0,Developing / Small Community
+indie-maker/saas-landing-py-replica-53,28.97,4.88,0.3,2,12,0,1,0,1,0,0,Developing / Small Community
+kylebeadle/Python-Audio-Player-replica-54,15.26,2.63,0.6276,1,126,9,1,1,1,0,0,Developing / Small Community
+m-col/pydantic-xml-replica-55,7.27,0.94,0.6152,12,162,7,1,1,0,0,0,Developing / Small Community
+s-m-e-e/minimal-mlops-replica-56,10.18,0.2,0.5986,1,16,1,1,0,0,0,0,Developing / Small Community
+dev-tldr/tiny-summarizer-replica-57,6.1,5.56,0.5743,2,24,2,1,0,1,0,1,Developing / Small Community
+alex-k/weather-notifier-cli-replica-58,5.2,4.64,0.7907,1,26,2,1,0,1,0,0,Developing / Small Community
+open-micro/fastapi-crud-demo-replica-59,5.25,3.0,0.6289,7,10,1,1,0,1,0,0,Developing / Small Community
+kennethreitz/autoenv,1112.84,0.05,0.3061,445,12754,2670,1,0,0,0,0,Stale / High Risk
+theorchard/charlotte,933.5,0.0,0.1684,50,67,15,1,0,0,1,0,Stale / High Risk
+defunkt/facebox,1001.19,0.14,0.1881,154,3707,668,0,0,1,0,0,Stale / High Risk
+cloudant/python-cloudant,454.23,0.04,0.2165,10,2280,516,1,0,1,1,0,Stale / High Risk
+mitsuhiko/phpserialize,1021.24,0.03,0.1794,53,71,20,1,1,1,0,0,Stale / High Risk
+ask/celerymon,342.68,0.01,0.3087,36,87,11,1,0,1,0,0,Stale / High Risk
+nose-devs/nose,1025.13,0.12,0.328,60,10,2,1,0,1,0,0,Stale / High Risk
+pypa/virtualenvwrapper,377.74,0.16,0.3144,644,23,2,1,0,1,0,0,Stale / High Risk
+ActiveState/appdirs,348.59,0.0,0.2865,23,17,1,1,0,1,0,0,Stale / High Risk
+kennethreitz/autoenv-replica-9,578.85,0.02,0.2157,515,1068,240,1,0,1,1,0,Stale / High Risk
+theorchard/charlotte-replica-10,723.15,0.01,0.1045,16,2054,303,1,0,1,0,1,Stale / High Risk
+defunkt/facebox-replica-11,988.61,0.01,0.4,76,32746,8482,1,1,1,0,0,Stale / High Risk
+cloudant/python-cloudant-replica-12,640.32,0.02,0.1311,51,466,31,1,0,1,1,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-13,841.28,0.01,0.4,10,1899,199,1,0,0,0,0,Stale / High Risk
+ask/celerymon-replica-14,917.19,0.09,0.4,112,2144,401,0,1,1,0,0,Stale / High Risk
+nose-devs/nose-replica-15,999.06,0.06,0.369,32,121,32,1,1,1,0,0,Stale / High Risk
+pypa/virtualenvwrapper-replica-16,1086.91,0.07,0.0898,19,79,10,1,0,1,1,0,Stale / High Risk
+ActiveState/appdirs-replica-17,371.68,0.01,0.0689,24,3416,762,1,1,1,0,0,Stale / High Risk
+kennethreitz/autoenv-replica-18,374.75,0.09,0.4,105,1927,462,1,0,1,0,0,Stale / High Risk
+theorchard/charlotte-replica-19,211.77,0.02,0.4,123,189,51,1,1,1,0,0,Stale / High Risk
+defunkt/facebox-replica-20,433.99,0.07,0.2819,16,219,12,1,1,1,0,0,Stale / High Risk
+cloudant/python-cloudant-replica-21,416.66,0.0,0.216,86,6169,1177,1,1,1,0,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-22,951.86,0.05,0.0745,84,10,1,1,1,1,0,0,Stale / High Risk
+ask/celerymon-replica-23,785.02,0.0,0.4,575,407,91,1,0,0,0,0,Stale / High Risk
+nose-devs/nose-replica-24,362.94,0.1,0.4,352,3411,885,1,1,1,0,0,Stale / High Risk
+pypa/virtualenvwrapper-replica-25,336.76,0.07,0.2991,31,276,15,1,0,1,1,0,Stale / High Risk
+ActiveState/appdirs-replica-26,852.23,0.02,0.3981,73,3136,919,1,1,0,0,0,Stale / High Risk
+kennethreitz/autoenv-replica-27,1174.85,0.14,0.258,44,10,1,1,0,0,1,0,Stale / High Risk
+theorchard/charlotte-replica-28,1167.12,0.05,0.4,30,167,19,1,0,0,0,0,Stale / High Risk
+defunkt/facebox-replica-29,329.86,0.03,0.2955,35,856,167,1,0,1,0,0,Stale / High Risk
+cloudant/python-cloudant-replica-30,263.92,0.05,0.4,439,180,34,1,1,1,0,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-31,1036.91,0.36,0.1439,51,28574,4880,1,0,1,0,0,Stale / High Risk
+ask/celerymon-replica-32,643.07,0.11,0.2159,536,23503,4052,1,0,1,0,0,Stale / High Risk
+nose-devs/nose-replica-33,324.05,0.07,0.2068,28,3240,912,1,0,0,0,0,Stale / High Risk
+pypa/virtualenvwrapper-replica-34,554.74,0.01,0.376,14,2215,231,1,0,0,0,0,Stale / High Risk
+ActiveState/appdirs-replica-35,988.45,0.08,0.1246,52,41,11,0,0,0,0,0,Stale / High Risk
+kennethreitz/autoenv-replica-36,657.43,0.05,0.1277,29,12975,3333,1,0,0,0,0,Stale / High Risk
+theorchard/charlotte-replica-37,807.43,0.19,0.1026,10,30083,7815,1,0,1,0,1,Stale / High Risk
+defunkt/facebox-replica-38,919.09,0.01,0.05,31,9347,2221,1,1,0,0,0,Stale / High Risk
+cloudant/python-cloudant-replica-39,1127.73,0.04,0.1612,43,343,99,1,1,0,0,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-40,503.9,0.15,0.0845,156,16021,4766,1,0,0,0,0,Stale / High Risk
+ask/celerymon-replica-41,530.25,0.14,0.3355,80,22,1,1,0,1,0,0,Stale / High Risk
+nose-devs/nose-replica-42,855.15,0.11,0.1882,17,31837,4794,1,1,1,0,0,Stale / High Risk
+pypa/virtualenvwrapper-replica-43,457.07,0.02,0.2343,83,96,17,1,0,0,0,0,Stale / High Risk
+ActiveState/appdirs-replica-44,347.69,0.01,0.3466,104,664,169,1,0,1,0,0,Stale / High Risk
+kennethreitz/autoenv-replica-45,191.03,0.14,0.2043,336,1817,105,1,0,0,0,0,Stale / High Risk
+theorchard/charlotte-replica-46,482.28,0.22,0.0535,33,45216,4821,1,0,1,0,0,Stale / High Risk
+defunkt/facebox-replica-47,1017.11,0.05,0.144,10,10,2,1,0,1,0,0,Stale / High Risk
+cloudant/python-cloudant-replica-48,648.31,0.03,0.2205,10,77,6,1,1,1,0,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-49,606.02,0.01,0.2994,128,10,1,1,1,1,0,0,Stale / High Risk
+ask/celerymon-replica-50,287.99,0.04,0.4,12,150,13,1,0,1,0,0,Stale / High Risk
+nose-devs/nose-replica-51,748.18,0.02,0.4,71,2279,472,1,1,1,0,0,Stale / High Risk
+pypa/virtualenvwrapper-replica-52,926.13,0.14,0.2806,10,24,6,1,1,1,0,0,Stale / High Risk
+ActiveState/appdirs-replica-53,764.5,0.03,0.1871,190,1735,497,1,1,0,1,1,Stale / High Risk
+kennethreitz/autoenv-replica-54,795.6,0.09,0.1194,11,1687,213,1,0,0,0,0,Stale / High Risk
+theorchard/charlotte-replica-55,952.43,0.18,0.2607,192,25298,2295,1,0,1,1,0,Stale / High Risk
+defunkt/facebox-replica-56,416.1,0.16,0.1639,10,10891,622,1,0,1,0,1,Stale / High Risk
+cloudant/python-cloudant-replica-57,780.12,0.04,0.2022,96,206,29,1,0,1,0,0,Stale / High Risk
+mitsuhiko/phpserialize-replica-58,408.8,0.02,0.2874,10,158,21,1,0,0,0,0,Stale / High Risk
+ask/celerymon-replica-59,955.36,0.01,0.215,34,598,35,1,0,0,0,0,Stale / High Risk

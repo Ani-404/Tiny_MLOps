@@ -49,9 +49,8 @@ TIER_NAMES = [
 def load_dataset() -> pd.DataFrame:
     """Load the repository dataset or generate it if missing."""
     if not DATA_PATH.exists():
-        from data_generator import main as generate_data
-        DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-        generate_data()
+        from data_generator import generate_data
+        return generate_data(DATA_PATH)
     return pd.read_csv(DATA_PATH)
 
 
