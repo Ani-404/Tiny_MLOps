@@ -1,366 +1,639 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RepoPulse | GitHub Open-Source Health & Welcomeness Scorer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RepoPulse — GitHub Health Scorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    /* ---- Reset & tokens ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #f7f6f3;
+      --bg-card:      #ffffff;
+      --bg-input:     #faf9f7;
+      --bg-chip:      #ede9e3;
+      --border:       #e2ddd8;
+      --border-hover: #c9c3bb;
+      --text-primary: #1a1714;
+      --text-secondary:#6b6560;
+      --text-muted:   #9e9893;
+      --accent:       #2563eb;
+      --accent-light: #eff4ff;
+      --accent-hover: #1d4ed8;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+      --shadow-lg:    0 8px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
+      --radius-sm:    8px;
+      --radius-md:    12px;
+      --radius-lg:    16px;
+      --radius-xl:    20px;
+      --green:  #16a34a; --green-bg:  #f0fdf4; --green-border:  #bbf7d0;
+      --blue:   #2563eb; --blue-bg:   #eff6ff; --blue-border:   #bfdbfe;
+      --amber:  #d97706; --amber-bg:  #fffbeb; --amber-border:  #fde68a;
+      --red:    #dc2626; --red-bg:    #fef2f2; --red-border:    #fecaca;
+    }
+
+    [data-theme="dark"] {
+      --bg:           #141210;
+      --bg-card:      #1e1b18;
+      --bg-input:     #252119;
+      --bg-chip:      #2a2622;
+      --border:       #332f2a;
+      --border-hover: #4a443d;
+      --text-primary: #f0ede8;
+      --text-secondary:#a09890;
+      --text-muted:   #6b6358;
+      --accent:       #4f8aff;
+      --accent-light: #1a2340;
+      --accent-hover: #6b9fff;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.3);
+      --shadow-md:    0 4px 12px rgba(0,0,0,.35);
+      --shadow-lg:    0 8px 32px rgba(0,0,0,.4);
+      --green:  #4ade80; --green-bg:  #0a2010; --green-border:  #166534;
+      --blue:   #60a5fa; --blue-bg:   #0f1e38; --blue-border:   #1e40af;
+      --amber:  #fbbf24; --amber-bg:  #1c1500; --amber-border:  #92400e;
+      --red:    #f87171; --red-bg:    #200a0a; --red-border:    #991b1b;
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #090d16;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      transition: background .2s, color .2s;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
+
+    /* ---- Layout ---- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background .2s, border-color .2s;
     }
-    .mesh-gradient {
-      background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.08) 35%, transparent 70%);
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    .score-circle {
-      transform: rotate(-90deg);
-      transform-origin: 50% 50%;
+    .logo-icon svg { width: 16px; height: 16px; color: #fff; }
+    .logo-text { font-size: 15px; font-weight: 700; letter-spacing: -.3px; }
+    .logo-badge {
+      font-size: 10px; font-weight: 600; letter-spacing: .05em;
+      background: var(--accent-light); color: var(--accent);
+      border: 1px solid currentColor;
+      border-radius: 4px; padding: 2px 6px;
+      text-transform: uppercase; opacity: .9;
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-link {
+      font-size: 13px; color: var(--text-secondary);
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+      transition: color .15s;
+    }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link svg { width: 12px; height: 12px; }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-chip);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .theme-toggle:hover { background: var(--border); color: var(--text-primary); }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    .sun-icon { display: none; }
+    [data-theme="dark"] .moon-icon { display: none; }
+    [data-theme="dark"] .sun-icon { display: block; }
+
+    main { max-width: 740px; margin: 0 auto; padding: 48px 20px 80px; }
+
+    /* ---- Hero ---- */
+    .hero { text-align: center; margin-bottom: 36px; }
+    .hero-eyebrow {
+      display: inline-block; margin-bottom: 14px;
+      font-size: 12px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 700; letter-spacing: -.5px;
+      line-height: 1.25; margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 15px; color: var(--text-secondary);
+      max-width: 500px; margin: 0 auto;
+    }
+
+    /* ---- Input card ---- */
+    .input-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: background .2s, border-color .2s;
+      margin-bottom: 10px;
+    }
+    .input-row { display: flex; gap: 10px; align-items: stretch; }
+    .input-wrap { flex: 1; position: relative; }
+    .input-icon {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--text-muted); pointer-events: none;
+      display: flex;
+    }
+    .input-icon svg { width: 16px; height: 16px; }
+    input[type="text"] {
+      width: 100%; padding: 11px 12px 11px 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font: 500 14px/1.4 'Fira Code', monospace;
+      outline: none;
+      transition: border-color .15s, background .2s;
+    }
+    input[type="text"]::placeholder { color: var(--text-muted); font-weight: 400; }
+    input[type="text"]:focus { border-color: var(--accent); }
+
+    .submit-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 20px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      font: 600 14px/1 'Inter', sans-serif;
+      cursor: pointer; white-space: nowrap;
+      transition: background .15s, transform .1s;
+      flex-shrink: 0;
+    }
+    .submit-btn:hover { background: var(--accent-hover); }
+    .submit-btn:active { transform: scale(.98); }
+    .submit-btn:disabled { opacity: .55; cursor: not-allowed; }
+    .submit-btn svg { width: 14px; height: 14px; }
+    .spinner {
+      width: 14px; height: 14px; border: 2px solid #ffffff55;
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .6s linear infinite; display: none;
+    }
+    .submit-btn.loading .btn-label { display: none; }
+    .submit-btn.loading .spinner { display: block; }
+    .submit-btn.loading .btn-arrow { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Sample chips */
+    .samples {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+      padding-top: 14px; margin-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .samples-label { color: var(--text-muted); margin-right: 2px; }
+    .chip {
+      padding: 4px 10px; border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-chip);
+      color: var(--text-secondary);
+      font: 500 12px/1 'Fira Code', monospace;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, color .15s;
+    }
+    .chip:hover {
+      border-color: var(--border-hover);
+      background: var(--border);
+      color: var(--text-primary);
+    }
+
+    /* ---- Error ---- */
+    .error-banner {
+      display: none;
+      padding: 12px 16px; border-radius: var(--radius-md);
+      background: var(--red-bg); border: 1px solid var(--red-border);
+      color: var(--red); font-size: 13px;
+      display: none; align-items: flex-start; gap: 10px;
+      margin-top: 12px;
+    }
+    .error-banner svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ---- Results ---- */
+    #results { display: none; margin-top: 28px; }
+
+    /* Score header card */
+    .score-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex; gap: 28px; align-items: flex-start;
+      flex-wrap: wrap;
+      transition: background .2s, border-color .2s;
+      margin-bottom: 14px;
+    }
+    .score-info { flex: 1; min-width: 200px; }
+    .score-repo {
+      font: 700 18px/1.3 'Fira Code', monospace;
+      margin-bottom: 10px; word-break: break-word;
+    }
+    .tier-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; border-radius: 999px;
+      font: 600 12px/1 'Inter', sans-serif;
+      border: 1px solid;
+      margin-bottom: 14px;
+    }
+    .tier-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .score-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+
+    .prob-label { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; letter-spacing: .03em; }
+    .prob-track {
+      height: 6px; border-radius: 999px; overflow: hidden;
+      background: var(--bg-chip); display: flex;
+    }
+    .prob-segment { height: 100%; transition: width .6s ease; }
+
+    /* Circular dial */
+    .score-dial { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .dial-wrap { position: relative; width: 100px; height: 100px; }
+    .dial-wrap svg { transform: rotate(-90deg); }
+    .dial-bg { stroke: var(--border); }
+    .dial-fg { stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+    .dial-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px;
+    }
+    .dial-num { font: 700 22px/1 'Inter', sans-serif; }
+    .dial-sub { font: 500 9px/1 'Inter', sans-serif; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+    .dial-tier-label { font-size: 11px; font-weight: 500; color: var(--text-muted); }
+
+    /* Metric grid */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px; margin-bottom: 14px;
+    }
+    .metric-tile {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 14px 16px;
+      transition: background .2s, border-color .2s;
+    }
+    .metric-label { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+    .metric-value { font: 600 18px/1 'Fira Code', monospace; }
+    .metric-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .bool-yes { color: var(--green); }
+    .bool-no  { color: var(--text-muted); }
+
+    /* Insights */
+    .insights-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: background .2s, border-color .2s;
+    }
+    .insights-title {
+      font-size: 14px; font-weight: 600; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .insights-title svg { width: 16px; height: 16px; color: var(--accent); }
+    .insight-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px; line-height: 1.55; color: var(--text-secondary);
+    }
+    .insight-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .insight-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 5px;
+    }
+
+    /* Colour helpers */
+    .c-green { color: var(--green); }
+    .c-blue  { color: var(--blue); }
+    .c-amber { color: var(--amber); }
+    .c-red   { color: var(--red); }
+    .tier-thriving { color: var(--green); border-color: var(--green-border); background: var(--green-bg); }
+    .tier-healthy  { color: var(--blue);  border-color: var(--blue-border);  background: var(--blue-bg); }
+    .tier-developing { color: var(--amber); border-color: var(--amber-border); background: var(--amber-bg); }
+    .tier-stale    { color: var(--red);   border-color: var(--red-border);   background: var(--red-bg); }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .input-row { flex-direction: column; }
+      .submit-btn { width: 100%; justify-content: center; }
+      .score-card { flex-direction: column-reverse; align-items: flex-start; }
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-100 mesh-gradient selection:bg-sky-500/30 selection:text-sky-200">
+<body>
 
-  <!-- Navbar -->
-  <header class="border-b border-slate-800/80 bg-slate-950/40 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-sky-500/20">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-        <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">RepoPulse</span>
-        <span class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">MLOps 2.0</span>
-      </div>
-      <div class="flex items-center space-x-4 text-sm text-slate-400">
-        <a href="/docs" target="_blank" class="hover:text-slate-200 transition-colors flex items-center space-x-1.5">
-          <span>API Docs</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-5xl mx-auto px-4 py-12">
-    <!-- Hero Section -->
-    <div class="text-center max-w-2xl mx-auto mb-10">
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white leading-tight">
-        Score Any GitHub Repo with <span class="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">Production ML</span>
-      </h1>
-      <p class="text-slate-400 text-base sm:text-lg">
-        Extracts 11 real-world signals across commit velocity, maintainer triage, and community documentation to evaluate open-source health.
-      </p>
-    </div>
-
-    <!-- Input Card -->
-    <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl mb-8">
-      <form id="analyze-form" class="flex flex-col sm:flex-row gap-3">
-        <div class="relative flex-1">
-          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-          </div>
-          <input
-            id="repo-input"
-            type="text"
-            required
-            placeholder="e.g. pallets/flask or https://github.com/tiangolo/fastapi"
-            class="w-full pl-11 pr-4 py-3.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all text-sm sm:text-base mono"
-          />
-        </div>
-        <button
-          type="submit"
-          id="submit-btn"
-          class="px-6 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white shadow-lg shadow-sky-500/25 flex items-center justify-center space-x-2 transition-all active:scale-[0.98] disabled:opacity-50"
-        >
-          <span id="btn-text">Audit Repo</span>
-          <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-          <svg id="btn-spinner" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white hidden" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-        </button>
-      </form>
-
-      <!-- Quick Links -->
-      <div class="mt-4 pt-4 border-t border-slate-800/60 flex flex-wrap items-center gap-2 text-xs">
-        <span class="text-slate-500">Try popular repos:</span>
-        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">pallets/flask</button>
-        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">tiangolo/fastapi</button>
-        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">psf/requests</button>
-        <button type="button" class="sample-btn px-2.5 py-1 rounded-md bg-slate-800/70 hover:bg-slate-700 text-slate-300 transition-colors mono">kennethreitz/autoenv</button>
-      </div>
-    </div>
-
-    <!-- Error Banner -->
-    <div id="error-card" class="hidden mb-8 p-4 rounded-xl bg-red-950/40 border border-red-500/30 text-red-300 text-sm flex items-start space-x-3">
-      <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
       </svg>
-      <div id="error-message"></div>
+    </div>
+    <span class="logo-text">RepoPulse</span>
+    <span class="logo-badge">Beta</span>
+  </div>
+  <div class="header-actions">
+    <a href="/docs" target="_blank" class="nav-link">
+      API docs
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+      <!-- moon -->
+      <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+      </svg>
+      <!-- sun -->
+      <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <span class="hero-eyebrow">Open-source intelligence</span>
+    <h1>How healthy is a GitHub repo, really?</h1>
+    <p>Paste any public repository URL and get a scored breakdown of its maintenance health, community responsiveness, and openness for contributors.</p>
+  </div>
+
+  <div class="input-card">
+    <form id="form">
+      <div class="input-row">
+        <div class="input-wrap">
+          <span class="input-icon">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </span>
+          <input id="repo-input" type="text" required
+            placeholder="e.g. tiangolo/fastapi or https://github.com/pallets/flask" />
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span class="btn-label">Check repo</span>
+          <svg class="btn-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <div class="spinner"></div>
+        </button>
+      </div>
+      <div class="samples">
+        <span class="samples-label">Try:</span>
+        <button type="button" class="chip">pallets/flask</button>
+        <button type="button" class="chip">tiangolo/fastapi</button>
+        <button type="button" class="chip">psf/requests</button>
+        <button type="button" class="chip">kennethreitz/autoenv</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="error-banner" id="error-banner">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span id="error-msg"></span>
+  </div>
+
+  <div id="results">
+    <!-- Score header -->
+    <div class="score-card">
+      <div class="score-info">
+        <div class="score-repo" id="r-repo">—</div>
+        <div class="tier-badge" id="r-badge"><span class="dot"></span><span id="r-tier">—</span></div>
+        <div class="score-meta">Model confidence: <strong id="r-conf">—</strong></div>
+        <div class="prob-label">Tier probability split</div>
+        <div class="prob-track" id="r-probs"></div>
+      </div>
+      <div class="score-dial">
+        <div class="dial-wrap">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle class="dial-bg" cx="50" cy="50" r="40" fill="none" stroke-width="8"/>
+            <circle class="dial-fg" id="r-ring" cx="50" cy="50" r="40" fill="none" stroke-width="8"
+              stroke-dasharray="251.327" stroke-dashoffset="251.327" stroke="var(--accent)"/>
+          </svg>
+          <div class="dial-text">
+            <span class="dial-num" id="r-score">0</span>
+            <span class="dial-sub">/ 100</span>
+          </div>
+        </div>
+        <div class="dial-tier-label" id="r-dial-label">Health score</div>
+      </div>
     </div>
 
-    <!-- Results Section -->
-    <div id="results-container" class="hidden space-y-6">
-
-      <!-- Top Summary Card -->
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-xl">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="space-y-3 text-center md:text-left">
-            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              <span id="res-repo-name" class="text-2xl font-bold mono text-white">owner/repo</span>
-              <span id="res-tier-badge" class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Thriving & Welcoming
-              </span>
-            </div>
-            <p class="text-slate-400 text-sm max-w-xl">
-              Model Confidence: <span id="res-confidence" class="font-semibold text-slate-200">92%</span> • Machine Learning decision evaluated by calibrated RandomForest pipeline.
-            </p>
-            <!-- Probability Bar -->
-            <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between text-xs text-slate-400">
-                <span>Tier Probability Distribution</span>
-              </div>
-              <div id="prob-bars" class="h-2 w-full rounded-full bg-slate-800 flex overflow-hidden">
-                <!-- populated by JS -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Circular Score Dial -->
-          <div class="flex flex-col items-center">
-            <div class="relative w-32 h-32 flex items-center justify-center">
-              <svg class="w-32 h-32 score-circle" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="10" class="text-slate-800" fill="transparent" />
-                <circle id="score-ring" cx="60" cy="60" r="50" stroke="currentColor" stroke-width="10" stroke-dasharray="314.159" stroke-dashoffset="314.159" stroke-linecap="round" class="text-sky-500 transition-all duration-1000 ease-out" fill="transparent" />
-              </svg>
-              <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span id="res-score-num" class="text-3xl font-extrabold text-white">0</span>
-                <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Health</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Metric grid -->
+    <div class="metric-grid">
+      <div class="metric-tile">
+        <div class="metric-label">Days since push</div>
+        <div class="metric-value" id="m-days">—</div>
+        <div class="metric-sub">Last commit</div>
       </div>
-
-      <!-- Feature Metrics Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Weekly Commits</span>
-          <span id="metric-commits" class="text-lg font-bold mono text-white">0</span>
-        </div>
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Issue Close Rate</span>
-          <span id="metric-close-rate" class="text-lg font-bold mono text-emerald-400">0%</span>
-        </div>
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Days Since Push</span>
-          <span id="metric-days-push" class="text-lg font-bold mono text-white">0d</span>
-        </div>
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Stars</span>
-          <span id="metric-stars" class="text-lg font-bold mono text-yellow-400">0</span>
-        </div>
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Contributing Doc</span>
-          <span id="metric-contrib" class="text-sm font-semibold">Yes</span>
-        </div>
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 text-center">
-          <span class="text-xs text-slate-400 block mb-1">Good First Issues</span>
-          <span id="metric-gfi" class="text-sm font-semibold">Active</span>
-        </div>
+      <div class="metric-tile">
+        <div class="metric-label">Weekly commits</div>
+        <div class="metric-value" id="m-commits">—</div>
+        <div class="metric-sub">8-week avg</div>
       </div>
-
-      <!-- Actionable Insights List -->
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-xl">
-        <h3 class="text-base font-semibold text-white mb-3 flex items-center space-x-2">
-          <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-          <span>Actionable AI Insights & Feedback</span>
-        </h3>
-        <ul id="insights-list" class="space-y-2 text-sm text-slate-300">
-          <!-- populated by JS -->
-        </ul>
+      <div class="metric-tile">
+        <div class="metric-label">Issue close rate</div>
+        <div class="metric-value" id="m-close">—</div>
+        <div class="metric-sub">Last 50 issues</div>
       </div>
-
+      <div class="metric-tile">
+        <div class="metric-label">Stars</div>
+        <div class="metric-value" id="m-stars">—</div>
+        <div class="metric-sub">GitHub stars</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-label">Contributing.md</div>
+        <div class="metric-value" id="m-contrib">—</div>
+        <div class="metric-sub">Onboarding guide</div>
+      </div>
+      <div class="metric-tile">
+        <div class="metric-label">Good first issues</div>
+        <div class="metric-value" id="m-gfi">—</div>
+        <div class="metric-sub">Contributor labels</div>
+      </div>
     </div>
-  </main>
 
-  <script>
-    const form = document.getElementById('analyze-form');
-    const input = document.getElementById('repo-input');
-    const submitBtn = document.getElementById('submit-btn');
-    const btnText = document.getElementById('btn-text');
-    const btnIcon = document.getElementById('btn-icon');
-    const btnSpinner = document.getElementById('btn-spinner');
-    const errorCard = document.getElementById('error-card');
-    const errorMessage = document.getElementById('error-message');
-    const resultsContainer = document.getElementById('results-container');
+    <!-- Insights -->
+    <div class="insights-card">
+      <div class="insights-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        What the model found
+      </div>
+      <div id="r-insights"></div>
+    </div>
+  </div>
+</main>
 
-    // Quick sample repo button handlers
-    document.querySelectorAll('.sample-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        input.value = btn.textContent;
-        form.requestSubmit();
+<script>
+  // ---- Theme ----
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'dark' || (!saved && prefersDark)) root.setAttribute('data-theme', 'dark');
+
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  });
+
+  // ---- Sample chips ----
+  const input = document.getElementById('repo-input');
+  document.querySelectorAll('.chip').forEach(c => {
+    c.addEventListener('click', () => { input.value = c.textContent; form.requestSubmit(); });
+  });
+
+  // ---- Form submit ----
+  const form      = document.getElementById('form');
+  const submitBtn = document.getElementById('submit-btn');
+  const errorEl   = document.getElementById('error-banner');
+  const errorMsg  = document.getElementById('error-msg');
+  const results   = document.getElementById('results');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const repo = input.value.trim();
+    if (!repo) return;
+
+    errorEl.style.display = 'none';
+    results.style.display = 'none';
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ repo_url: repo }),
       });
-    });
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const repo = input.value.trim();
-      if (!repo) return;
-
-      // Reset states
-      errorCard.classList.add('hidden');
-      resultsContainer.classList.add('hidden');
-      submitBtn.disabled = true;
-      btnText.textContent = 'Analyzing...';
-      btnIcon.classList.add('hidden');
-      btnSpinner.classList.remove('hidden');
-
-      try {
-        const response = await fetch('/predict', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ repo_url: repo })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.detail || 'Failed to inspect repository.');
-        }
-
-        renderResults(data);
-      } catch (err) {
-        errorMessage.textContent = err.message;
-        errorCard.classList.remove('hidden');
-      } finally {
-        submitBtn.disabled = false;
-        btnText.textContent = 'Audit Repo';
-        btnIcon.classList.remove('hidden');
-        btnSpinner.classList.add('hidden');
-      }
-    });
-
-    function renderResults(data) {
-      document.getElementById('res-repo-name').textContent = data.repo;
-      document.getElementById('res-confidence').textContent = `${(data.confidence * 100).toFixed(0)}%`;
-
-      // Tier badge color
-      const tierBadge = document.getElementById('res-tier-badge');
-      tierBadge.textContent = data.health_tier;
-      tierBadge.className = 'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ';
-      
-      const scoreRing = document.getElementById('score-ring');
-      const scoreNum = document.getElementById('res-score-num');
-      scoreNum.textContent = data.health_score;
-
-      if (data.health_score >= 85) {
-        tierBadge.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
-        scoreRing.classList.add('text-emerald-400');
-        scoreRing.classList.remove('text-sky-400', 'text-amber-400', 'text-rose-400');
-      } else if (data.health_score >= 70) {
-        tierBadge.classList.add('bg-sky-500/10', 'text-sky-400', 'border-sky-500/20');
-        scoreRing.classList.add('text-sky-400');
-        scoreRing.classList.remove('text-emerald-400', 'text-amber-400', 'text-rose-400');
-      } else if (data.health_score >= 50) {
-        tierBadge.classList.add('bg-amber-500/10', 'text-amber-400', 'border-amber-500/20');
-        scoreRing.classList.add('text-amber-400');
-        scoreRing.classList.remove('text-emerald-400', 'text-sky-400', 'text-rose-400');
-      } else {
-        tierBadge.classList.add('bg-rose-500/10', 'text-rose-400', 'border-rose-500/20');
-        scoreRing.classList.add('text-rose-400');
-        scoreRing.classList.remove('text-emerald-400', 'text-sky-400', 'text-amber-400');
-      }
-
-      // Animate score ring: perimeter = 2 * PI * 50 = ~314.159
-      const maxOffset = 314.159;
-      const offset = maxOffset - (data.health_score / 100) * maxOffset;
-      setTimeout(() => {
-        scoreRing.style.strokeDashoffset = offset;
-      }, 50);
-
-      // Metrics grid
-      const m = data.metrics;
-      document.getElementById('metric-commits').textContent = m.avg_weekly_commits.toFixed(1);
-      document.getElementById('metric-close-rate').textContent = `${(m.issue_close_rate * 100).toFixed(0)}%`;
-      document.getElementById('metric-days-push').textContent = `${Math.round(m.days_since_last_push)}d`;
-      document.getElementById('metric-stars').textContent = m.stars_count.toLocaleString();
-
-      const contribEl = document.getElementById('metric-contrib');
-      contribEl.textContent = m.has_contributing ? 'Present' : 'Missing';
-      contribEl.className = `text-sm font-semibold ${m.has_contributing ? 'text-emerald-400' : 'text-slate-500'}`;
-
-      const gfiEl = document.getElementById('metric-gfi');
-      gfiEl.textContent = m.has_good_first_issues ? 'Active' : 'None';
-      gfiEl.className = `text-sm font-semibold ${m.has_good_first_issues ? 'text-emerald-400' : 'text-slate-500'}`;
-
-      // Insights
-      const insightsList = document.getElementById('insights-list');
-      insightsList.innerHTML = '';
-      (data.insights || []).forEach(item => {
-        const li = document.createElement('li');
-        li.className = 'flex items-start space-x-2.5 py-1';
-        li.innerHTML = `
-          <svg class="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>${item}</span>
-        `;
-        insightsList.appendChild(li);
-      });
-
-      // Probability bars
-      const probContainer = document.getElementById('prob-bars');
-      probContainer.innerHTML = '';
-      const colors = {
-        'Thriving & Welcoming': 'bg-emerald-500',
-        'Healthy & Maintained': 'bg-sky-500',
-        'Developing / Small Community': 'bg-amber-500',
-        'Stale / High Risk': 'bg-rose-500',
-      };
-      for (const [tier, prob] of Object.entries(data.tier_probabilities || {})) {
-        if (prob > 0.01) {
-          const bar = document.createElement('div');
-          bar.className = `${colors[tier] || 'bg-slate-500'} h-full transition-all duration-500`;
-          bar.style.width = `${(prob * 100).toFixed(1)}%`;
-          bar.title = `${tier}: ${(prob * 100).toFixed(1)}%`;
-          probContainer.appendChild(bar);
-        }
-      }
-
-      resultsContainer.classList.remove('hidden');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Something went wrong.');
+      render(data);
+    } catch(err) {
+      errorMsg.textContent = err.message;
+      errorEl.style.display = 'flex';
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
     }
-  </script>
+  });
+
+  // ---- Render ----
+  const TIER_CLASS = {
+    'Thriving & Welcoming':       'tier-thriving',
+    'Healthy & Maintained':       'tier-healthy',
+    'Developing / Small Community': 'tier-developing',
+    'Stale / High Risk':          'tier-stale',
+  };
+  const TIER_COLOR = {
+    'Thriving & Welcoming':       'var(--green)',
+    'Healthy & Maintained':       'var(--blue)',
+    'Developing / Small Community': 'var(--amber)',
+    'Stale / High Risk':          'var(--red)',
+  };
+  const PROB_COLOR = ['var(--green)','var(--blue)','var(--amber)','var(--red)'];
+  const TIER_ORDER = [
+    'Thriving & Welcoming','Healthy & Maintained','Developing / Small Community','Stale / High Risk'
+  ];
+
+  function fmt(n) {
+    if (n >= 1000) return (n/1000).toFixed(1) + 'k';
+    return String(n);
+  }
+
+  function render(d) {
+    // Repo name
+    document.getElementById('r-repo').textContent = d.repo;
+    // Badge
+    const badge = document.getElementById('r-badge');
+    badge.className = 'tier-badge ' + (TIER_CLASS[d.health_tier] || '');
+    document.getElementById('r-tier').textContent = d.health_tier;
+    // Confidence
+    document.getElementById('r-conf').textContent = `${(d.confidence * 100).toFixed(0)}%`;
+    // Score dial
+    const score = d.health_score;
+    document.getElementById('r-score').textContent = score;
+    document.getElementById('r-dial-label').textContent = d.health_tier;
+    const ring = document.getElementById('r-ring');
+    ring.style.stroke = TIER_COLOR[d.health_tier] || 'var(--accent)';
+    setTimeout(() => {
+      ring.style.strokeDashoffset = 251.327 * (1 - score / 100);
+    }, 50);
+    // Prob bars
+    const probsEl = document.getElementById('r-probs');
+    probsEl.innerHTML = '';
+    TIER_ORDER.forEach((tier, i) => {
+      const p = d.tier_probabilities?.[tier] ?? 0;
+      if (p < 0.005) return;
+      const seg = document.createElement('div');
+      seg.className = 'prob-segment';
+      seg.style.width = '0%';
+      seg.style.background = PROB_COLOR[i];
+      seg.title = `${tier}: ${(p*100).toFixed(1)}%`;
+      probsEl.appendChild(seg);
+      setTimeout(() => { seg.style.width = `${(p*100).toFixed(1)}%`; }, 80);
+    });
+    // Metrics
+    const m = d.metrics;
+    const days = Math.round(m.days_since_last_push);
+    document.getElementById('m-days').textContent = days < 1 ? 'Today' : `${days}d`;
+    document.getElementById('m-days').style.color =
+      days <= 7 ? 'var(--green)' : days >= 90 ? 'var(--red)' : 'var(--text-primary)';
+
+    document.getElementById('m-commits').textContent = m.avg_weekly_commits.toFixed(1);
+    document.getElementById('m-commits').style.color =
+      m.avg_weekly_commits >= 5 ? 'var(--green)' : m.avg_weekly_commits < 1 ? 'var(--red)' : 'var(--text-primary)';
+
+    const cr = m.issue_close_rate;
+    document.getElementById('m-close').textContent = `${(cr*100).toFixed(0)}%`;
+    document.getElementById('m-close').style.color =
+      cr >= 0.65 ? 'var(--green)' : cr < 0.35 ? 'var(--red)' : 'var(--text-primary)';
+
+    document.getElementById('m-stars').textContent = fmt(m.stars_count);
+
+    const contribEl = document.getElementById('m-contrib');
+    contribEl.textContent = m.has_contributing ? 'Present' : 'Missing';
+    contribEl.className = 'metric-value ' + (m.has_contributing ? 'bool-yes' : 'bool-no');
+
+    const gfiEl = document.getElementById('m-gfi');
+    gfiEl.textContent = m.has_good_first_issues ? 'Active' : 'None';
+    gfiEl.className = 'metric-value ' + (m.has_good_first_issues ? 'bool-yes' : 'bool-no');
+
+    // Insights
+    const insightsEl = document.getElementById('r-insights');
+    insightsEl.innerHTML = '';
+    (d.insights || []).forEach(text => {
+      const div = document.createElement('div');
+      div.className = 'insight-item';
+      div.innerHTML = `<div class="insight-dot"></div><span>${text}</span>`;
+      insightsEl.appendChild(div);
+    });
+
+    results.style.display = 'block';
+    results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
 </body>
 </html>
-
