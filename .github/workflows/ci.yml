@@ -58,13 +58,6 @@ jobs:
           docker push "$IMAGE_NAME:latest"
           docker push "$IMAGE_NAME:${GITHUB_SHA}"
 
-      - name: Make image public
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api --method PUT /user/packages/container/tiny-mlops/visibility \
-            -f visibility=public
-
       - name: Configure AWS credentials
         if: env.ECS_SERVICE_ARN != ''
         uses: aws-actions/configure-aws-credentials@v4

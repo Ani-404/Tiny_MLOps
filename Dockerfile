@@ -2,6 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+# MLflow/GitPython look for git during training; the image has no .git history.
+ENV GIT_PYTHON_REFRESH=quiet
+
 # Install dependencies first (cached layer)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

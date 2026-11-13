@@ -6,7 +6,14 @@ the serialized model pipeline to disk.
 
 from __future__ import annotations
 
+import logging
+import os
 from pathlib import Path
+
+# Train runs in Docker without git. Silence GitPython/MLflow repo metadata warnings.
+os.environ.setdefault("GIT_PYTHON_REFRESH", "quiet")
+logging.getLogger("mlflow.utils.git_utils").setLevel(logging.ERROR)
+logging.getLogger("mlflow.tracking.context.git_context").setLevel(logging.ERROR)
 
 import joblib
 import mlflow
