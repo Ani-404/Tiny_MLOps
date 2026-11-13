@@ -39,6 +39,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      ECS_SERVICE_ARN: ${{ secrets.ECS_SERVICE_ARN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -64,7 +66,7 @@ jobs:
             -f visibility=public
 
       - name: Configure AWS credentials
-        if: ${{ secrets.ECS_SERVICE_ARN != '' }}
+        if: env.ECS_SERVICE_ARN != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -72,9 +74,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Deploy to ECS Express Mode
-        if: ${{ secrets.ECS_SERVICE_ARN != '' }}
-        env:
-          ECS_SERVICE_ARN: ${{ secrets.ECS_SERVICE_ARN }}
+        if: env.ECS_SERVICE_ARN != ''
         run: |
           aws ecs update-express-gateway-service \
             --region "$AWS_REGION" \
