@@ -7,13 +7,10 @@ on:
     branches: [main]
 
 env:
-  AWS_REGION:     us-east-1               # change to your preferred region
-  ECR_REPOSITORY: tiny-mlops             # must match what you create in ECR
+  AWS_REGION: us-east-1
+  IMAGE_NAME: ghcr.io/ani-404/tiny-mlops
 
 jobs:
-  # ─────────────────────────────────────────────
-  # Job 1: Run tests on every push and PR
-  # ─────────────────────────────────────────────
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -34,57 +31,53 @@ jobs:
       - name: Run tests
         run: pytest -v
 
-  # ─────────────────────────────────────────────
-  # Job 2: Build & push Docker image to ECR
-  # Runs only on pushes to main (not PRs)
-  # ─────────────────────────────────────────────
   deploy:
     name: Build & Deploy
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        run: |
+          docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:${GITHUB_SHA}" .
+          docker push "$IMAGE_NAME:latest"
+          docker push "$IMAGE_NAME:${GITHUB_SHA}"
+
+      - name: Make image public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method PUT /user/packages/container/tiny-mlops/visibility \
+            -f visibility=public
+
       - name: Configure AWS credentials
+        if: ${{ secrets.ECS_SERVICE_ARN != '' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region:            ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Log in to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build, tag, and push Docker image to ECR
+      - name: Deploy to ECS Express Mode
+        if: ${{ secrets.ECS_SERVICE_ARN != '' }}
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECS_SERVICE_ARN: ${{ secrets.ECS_SERVICE_ARN }}
         run: |
-          IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:latest"
-          docker build -t "$IMAGE_URI" .
-          docker push "$IMAGE_URI"
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
-
-      - name: Deploy to App Runner
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: |
-          IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:latest"
-          aws apprunner update-service \
-            --service-arn "${{ secrets.APP_RUNNER_SERVICE_ARN }}" \
-            --source-configuration "{
-              \"ImageRepository\": {
-                \"ImageIdentifier\": \"$IMAGE_URI\",
-                \"ImageConfiguration\": {
-                  \"Port\": \"8000\",
-                  \"RuntimeEnvironmentVariables\": {
-                    \"GITHUB_TOKEN\": \"${{ secrets.GITHUB_TOKEN_API }}\"
-                  }
-                },
-                \"ImageRepositoryType\": \"ECR\"
-              },
-              \"AutoDeploymentsEnabled\": false
-            }"
-          echo "Deployment triggered for $IMAGE_URI"
+          aws ecs update-express-gateway-service \
+            --region "$AWS_REGION" \
+            --service-arn "$ECS_SERVICE_ARN" \
+            --primary-container "{\"image\":\"$IMAGE_NAME:${GITHUB_SHA}\",\"containerPort\":8000}" \
+            --health-check-path /health
